@@ -13,12 +13,11 @@ export class BoardsService {
 
   createBoard(createBoardDto: CreateBoardDto): Board {
     const board: Board = {
-      id: uuid,
+      id: uuid(),
       title: createBoardDto.title,
       description: createBoardDto.description,
       status: BoardStatus.PUBLIC,
     };
-
     this.boards.push(board);
     return board;
   }

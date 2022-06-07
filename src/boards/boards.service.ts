@@ -30,4 +30,8 @@ export class BoardsService {
     }
     return found;
   }
+
+  async deleteBoard(id: number): Promise<void> {
+    await this.boardRepository.delete(id);
+  }
 }

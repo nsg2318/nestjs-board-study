@@ -40,4 +40,8 @@ export class BoardsService {
     board.status = status;
     return await this.boardRepository.save(board);
   }
+
+  async getAll(): Promise<Board[]> {
+    return await this.boardRepository.find();
+  }
 }

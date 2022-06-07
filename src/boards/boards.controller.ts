@@ -7,11 +7,12 @@ import {
   Post,
   UsePipes,
   ParseIntPipe,
-  ValidationPipe,
+  ValidationPipe, Patch,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board-dto';
 import { Board } from './board.entity';
+import {BoardStatus} from "./board-status.enum";
 
 @Controller('boards')
 export class BoardsController {
@@ -31,5 +32,13 @@ export class BoardsController {
   @Delete('/:id')
   deleteBoardById(@Param('id', ParseIntPipe) id: number): Promise<void> {
     return this.boardsService.deleteBoard(id);
+  }
+
+  @Patch('/:id/status')
+  updateStatus(
+    @Param('id') id: number,
+    @Body('status', ValidationPipe) status: BoardStatus,
+  ): Promise<Board> {
+    return this.boardsService.updateStatus(id, status);
   }
 }

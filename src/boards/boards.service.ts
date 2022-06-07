@@ -34,4 +34,10 @@ export class BoardsService {
   async deleteBoard(id: number): Promise<void> {
     await this.boardRepository.delete(id);
   }
+
+  async updateStatus(id: number, status: BoardStatus): Promise<Board> {
+    const board = await this.getBoardById(id); //getBoardById도 async-await 이기 때문에
+    board.status = status;
+    return await this.boardRepository.save(board);
+  }
 }
